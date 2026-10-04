@@ -1,1 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PaperWar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #111c2a;
+    --side: #0c141f;
+    --text: #e8ecef;
+    --muted: #9fb0bf;
+    --line: #24344a;
+    --green: #009246;
+    --red: #ce2b37;
+    --pill: #dcdedf;
+    --side-w: 15rem;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 1rem; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.6;
+  }
+  a { color: inherit; }
+  a:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
 
+  /* Sidebar */
+  .side {
+    position: fixed; inset: 0 auto 0 0;
+    width: var(--side-w);
+    background: var(--side);
+    border-right: 1px solid var(--line);
+    padding: 1.5rem 1rem;
+    display: flex; flex-direction: column; gap: 2rem;
+  }
+  .brand { font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; text-decoration: none; }
+  .stripe { display: flex; height: 4px; margin-top: .5rem; border-radius: 2px; overflow: hidden; }
+  .stripe i { flex: 1; }
+  .stripe i:nth-child(1) { background: var(--green); }
+  .stripe i:nth-child(2) { background: #f2f2f2; }
+  .stripe i:nth-child(3) { background: var(--red); }
+  nav { display: flex; flex-direction: column; gap: .25rem; }
+  nav a {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: .6rem .8rem; border-radius: .6rem;
+    text-decoration: none; color: var(--muted); font-weight: 600;
+  }
+  nav a:hover { background: var(--line); color: var(--text); }
+  nav a[aria-current="page"] { background: var(--line); color: var(--text); }
+  nav small { font-weight: 400; font-size: .75rem; color: var(--muted); }
+
+  /* Contenuto */
+  main { margin-left: var(--side-w); padding: 4rem 3rem 5rem; max-width: 62rem; }
+  h1 { font-size: clamp(2.6rem, 7vw, 4.8rem); line-height: 1; letter-spacing: -0.035em; font-weight: 800; margin: 0 0 1rem; }
+  .lead { font-size: 1.2rem; color: var(--muted); max-width: 36rem; margin: 0 0 1.6rem; }
+  .pills { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 3.5rem; }
+  .pill {
+    background: var(--pill); color: #111; border-radius: 999px;
+    padding: .2rem .8rem; font-size: .95rem; font-weight: 600;
+  }
+  h2 { font-size: 1.5rem; letter-spacing: -0.01em; margin: 0 0 1rem; }
+  section { margin-bottom: 3rem; }
+  ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 1rem; max-width: 40rem; counter-reset: step; }
+  ol li { counter-increment: step; padding-left: 3rem; position: relative; }
+  ol li::before {
+    content: counter(step);
+    position: absolute; left: 0; top: 0;
+    width: 2rem; height: 2rem; border-radius: 50%;
+    background: var(--line); display: grid; place-items: center; font-weight: 800;
+  }
+  ol strong { display: block; }
+  ol span { color: var(--muted); }
+  dl { margin: 0; display: grid; grid-template-columns: 9rem 1fr; gap: .6rem 1rem; max-width: 40rem; }
+  dt { font-weight: 800; }
+  dd { margin: 0; color: var(--muted); }
+  footer { color: var(--muted); font-size: .9rem; border-top: 1px solid var(--line); padding-top: 1.2rem; max-width: 40rem; }
+
+  /* Mobile: la sidebar diventa una barra in alto */
+  @media (max-width: 720px) {
+    .side {
+      position: static; width: auto; flex-direction: row; align-items: center;
+      justify-content: space-between; gap: 1rem; padding: 1rem;
+      border-right: 0; border-bottom: 1px solid var(--line);
+    }
+    .stripe { display: none; }
+    nav { flex-direction: row; }
+    nav small { display: none; }
+    main { margin-left: 0; padding: 2.5rem 1.25rem 4rem; }
+    dl { grid-template-columns: 1fr; gap: .1rem; }
+    dd { margin-bottom: .8rem; }
+  }
+</style>
+</head>
+<body>
+  <aside class="side">
+    <div>
+      <a class="brand" href="index.html">PaperWar</a>
+      <div class="stripe" aria-hidden="true"><i></i><i></i><i></i></div>
+    </div>
+    <nav aria-label="Menu principale">
+      <a href="index.html" aria-current="page">Homepage</a>
+      <a href="game.html">Game <small>presto</small></a>
+    </nav>
+  </aside>
+
+  <main>
+    <h1>Guerre sulla mappa, decise da voi.</h1>
+    <p class="lead">Scegli uno Stato, vota e combatti per il territorio. Più soldati, alleanze e confini decidono chi vince ogni guerra.</p>
+
+    <div class="pills" aria-label="Alcuni Stati">
+      <span class="pill">Italy 🇮🇹</span>
+      <span class="pill">Germany 🇩🇪</span>
+      <span class="pill">France 🇫🇷</span>
+      <span class="pill">United Kingdom 🇬🇧</span>
+    </div>
+
+    <section>
+      <h2>Come funziona</h2>
+      <ol>
+        <li><strong>Scegli il tuo Stato</strong><span>Il flair accanto al tuo nome dice da che parte stai.</span></li>
+        <li><strong>Vota a ogni guerra</strong><span>Ogni voto è un soldato in più per il tuo Stato.</span></li>
+        <li><strong>La mappa cambia</strong><span>Chi ha più forza conquista il territorio e la storia va avanti.</span></li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Le serie</h2>
+      <dl>
+        <dt>WW1</dt><dd>La Grande Guerra.</dd>
+        <dt>WW2</dt><dd>La Seconda guerra mondiale.</dd>
+        <dt>WW3</dt><dd>La guerra di oggi.</dd>
+        <dt>Imperialism</dt><dd>Guerre tra regioni, a zolle di terra.</dd>
+      </dl>
+    </section>
+
+    <footer>La pagina Game, con la mappa interattiva, arriva presto.</footer>
+  </main>
+</body>
+</html>
